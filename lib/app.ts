@@ -10,7 +10,7 @@ class App {
 
     public app: express.Application;
     public routesPrv: Routes = new Routes();
-    public mongoUrl: string = 'mongodb://localhost/botonera';
+    public mongoUrl: string = 'mongodb://mongodb/botonera';
 
     constructor() {
         this.app = express();
