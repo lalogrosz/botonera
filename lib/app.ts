@@ -2,8 +2,9 @@
 
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import {Routes} from '../routes/routes';
+import { Routes } from '../routes/routes';
 import * as mongoose from "mongoose";
+import * as cors from "cors";
 
 class App {
 
@@ -13,23 +14,33 @@ class App {
 
     constructor() {
         this.app = express();
-        this.config();        
+        this.config();
         this.routesPrv.routes(this.app);
         this.mongoSetup();
     }
 
-    private config(): void{
+    private config(): void {
         // support application/json type post data
         this.app.use(bodyParser.json());
 
+        this.app.use(express.static('public'));
+
         //support application/x-www-form-urlencoded post data
         this.app.use(bodyParser.urlencoded({ extended: false }));
+
+        const options: cors.CorsOptions = {
+            allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+            credentials: true,
+            methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+            preflightContinue: false
+        };
         
+        this.app.use(cors());
     }
 
-    private mongoSetup(): void{
+    private mongoSetup(): void {
         (<any>mongoose).Promise = global.Promise;
-        mongoose.connect(this.mongoUrl);    
+        mongoose.connect(this.mongoUrl);
     }
 
 }

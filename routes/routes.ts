@@ -24,7 +24,9 @@ export class Routes {
         });
 
         app.route('/category-button')
-        .post(this.categoryButtonController.addCategory);
+        .post(this.categoryButtonController.addCategory)
+        .get(this.categoryButtonController.getAll);
+
 
         // button detail
         app.route('/category-button/:buttonId')        
