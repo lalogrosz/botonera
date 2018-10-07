@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node ./lib/server.ts",
+    "build": "$(npm bin)/tsc",
+    "dev": "$(npm bin)/ts-node ./lib/server.ts",
     "start": "nodemon ./dist/server.js",
     "prod": "npm run build && npm run start"
   },
@@ -23,6 +23,9 @@
     "nodemon": "^1.18.4"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.4"
+    "@types/cors": "^2.8.4",
+    "ts-node": "3.2.2",
+    "tslint": "5.3.2",
+    "typescript": "2.9.2"
   }
 }
