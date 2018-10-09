@@ -41,7 +41,7 @@ class App {
     private mongoSetup(): void {
         (<any>mongoose).Promise = global.Promise;
 
-        let mongodb_connection_string = 'mongodb://mongodb:27017/' + this.dbName;
+        let mongodb_connection_string = 'mongodb://userVRT:O6XEEJ4d1YywcE2t@mongodb:27017/' + this.dbName;
      
         mongoose.connect(mongodb_connection_string);
     }
