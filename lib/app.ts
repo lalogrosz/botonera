@@ -23,8 +23,8 @@ class App {
     private config(): void {
         // support application/json type post data
         this.app.use(bodyParser.json());
-
-        this.app.use(path.join(__dirname, 'public'));
+        const staticPath = path.join(__dirname, 'public');
+        this.app.use(express.static(staticPath));
 
         //support application/x-www-form-urlencoded post data
         this.app.use(bodyParser.urlencoded({ extended: false }));
