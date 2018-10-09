@@ -43,8 +43,8 @@ class App {
 
         let mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + this.dbName;
         //take advantage of openshift env vars when available:
-        if(process.env.OPENSHIFT_MONGODB_DB_URL){
-            mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + this.dbName;
+        if(process.env.DATABASE_SERVICE_NAME){
+            mongodb_connection_string = process.env.DATABASE_SERVICE_NAME + this.dbName;
         }
         mongoose.connect(mongodb_connection_string);
     }
