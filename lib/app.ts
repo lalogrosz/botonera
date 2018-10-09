@@ -10,7 +10,7 @@ class App {
 
     public app: express.Application;
     public routesPrv: Routes = new Routes();
-    public dbName: string = 'botonera';
+    public dbName: string = 'mongodb';
 
     constructor() {
         this.app = express();
@@ -41,7 +41,7 @@ class App {
     private mongoSetup(): void {
         (<any>mongoose).Promise = global.Promise;
 
-        let mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + this.dbName;
+        let mongodb_connection_string = 'mongodb://mongodb:27017/' + this.dbName;
         //take advantage of openshift env vars when available:
         if(process.env.DATABASE_SERVICE_NAME){
             mongodb_connection_string = process.env.DATABASE_SERVICE_NAME + this.dbName;
