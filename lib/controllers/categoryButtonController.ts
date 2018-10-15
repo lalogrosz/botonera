@@ -18,8 +18,10 @@ export class CategoryButtonController {
     }
 
     public addCategory (req: Request, res: Response) {  
+        const user = req.headers.username;
                 
-        let newCategory = new CategoryButton(req.body);       
+        let newCategory = new CategoryButton(req.body);  
+        newCategory.set('user', user);     
         
         newCategory.save((err, category) => {
             if(err){
@@ -29,7 +31,21 @@ export class CategoryButtonController {
         });
     }
 
+    public updateCategory (req: Request, res: Response) {  
+                
+        /*let Category = new CategoryButton(req.body);       
+        
+        newCategory.save((err, category) => {
+            if(err){
+                res.send(err);
+            }    
+            res.json(category);
+        });*/
+    }
+
     public addNewButton (req: Request, res: Response) {  
+
+        const user = req.headers.username;
         
         const category = req.body.category_id;
         const name =  req.body.name;
@@ -39,7 +55,7 @@ export class CategoryButtonController {
             if(err){
                 res.send(err);
             }
-            if (categoryButton) {
+            if (categoryButton && categoryButton.get('user') === user) {
                 const buttons = categoryButton.get('buttons');
                 buttons.push({
                     name: name,
@@ -49,7 +65,7 @@ export class CategoryButtonController {
                     if(err){
                         res.send(err);
                     }    
-                    res.json(categoryButton);
+                    res.json(buttons[buttons.length - 1]);
                 });
             } else {
                 res.status(404);

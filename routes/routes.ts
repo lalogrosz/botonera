@@ -30,12 +30,7 @@ export class Routes {
 
         // button detail
         app.route('/category-button/:buttonId')        
-        .put((req: Request, res: Response) => {
-        // Update a button           
-            res.status(200).send({
-                message: 'PUT request successfulll!!!!'
-            })
-        })
+        .put(this.categoryButtonController.updateCategory)
         .delete((req: Request, res: Response) => {       
         // Delete a button     
             res.status(200).send({

@@ -23,7 +23,8 @@ class App {
     private config(): void {
         // support application/json type post data
         this.app.use(bodyParser.json());
-        const staticPath = path.join(__dirname, 'public');
+        const staticPath = path.join(__dirname, '../public');
+        console.log('Static path',staticPath);
         this.app.use(express.static(staticPath));
 
         //support application/x-www-form-urlencoded post data
@@ -42,7 +43,7 @@ class App {
     private mongoSetup(): void {
         (<any>mongoose).Promise = global.Promise;
 
-        let mongodb_connection_string = 'mongodb://userVRT:O6XEEJ4d1YywcE2t@mongodb:27017/' + this.dbName;
+        let mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + this.dbName;
      
         mongoose.connect(mongodb_connection_string);
     }

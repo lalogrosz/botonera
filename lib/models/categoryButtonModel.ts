@@ -15,7 +15,7 @@ export const CategoryButtonSchema = new Schema({
     },
     user: {
         type: String,
-        required: 'Enter el user id',
+        required: 'Enter a user id',
         index: true
     },
     buttons: [{
