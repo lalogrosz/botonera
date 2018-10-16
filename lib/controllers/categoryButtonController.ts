@@ -73,4 +73,36 @@ export class CategoryButtonController {
             }
         });
     }
+
+    public deleteButton (req: Request, res: Response) {  
+        const user = req.headers.username;
+        
+        const category = req.params.categoryId;
+        const buttonId =  req.params.buttonId;
+        
+        CategoryButton.findById(category, (err, categoryButton) => {
+            if(err){
+                res.send(err);
+            }
+            if (categoryButton && categoryButton.get('user') === user) {
+                let button;
+                const buttons = categoryButton.get('buttons').filter(item => {
+                    if (item._id.toString() !== buttonId) {
+                        return true;
+                    }
+                    button = item;
+                });
+                categoryButton.update({buttons: buttons}, (err) => {
+                    if(err){
+                        res.send(err);
+                    }    
+                    res.json(button);
+                });
+            } else {
+                res.status(404);
+                res.send('Category not found'); 
+            }
+        });       
+        
+    }
 }

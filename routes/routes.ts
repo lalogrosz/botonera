@@ -29,7 +29,7 @@ export class Routes {
 
 
         // button detail
-        app.route('/category-button/:buttonId')        
+        app.route('/category-button/:categoryId')        
         .put(this.categoryButtonController.updateCategory)
         .delete((req: Request, res: Response) => {       
         // Delete a button     
@@ -42,6 +42,9 @@ export class Routes {
             dest: __dirname + '/../public/sounds/',
           });
         
-        app.post('/button/', upload.single('sound'), this.categoryButtonController.addNewButton)
+        app.post('/button/', upload.single('sound'), this.categoryButtonController.addNewButton);
+        
+        app.route('/category-button/:categoryId/button/:buttonId')
+           .delete(this.categoryButtonController.deleteButton)
     }
 }
