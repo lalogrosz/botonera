@@ -3,6 +3,7 @@
 import {Request, Response} from "express";
 import { CategoryButtonController } from '../lib/controllers/categoryButtonController';
 import * as multer from 'multer';
+import config from '../lib/config/config';
 
 export class Routes {      
     
@@ -39,10 +40,12 @@ export class Routes {
         });
 
         const upload = multer({
-            dest: __dirname + '/../public/sounds/',
+            dest: config.SOUND_PATH
           });
         
-        app.post('/button/', upload.single('sound'), this.categoryButtonController.addNewButton);
+        app.post('/button/', upload.single('sound'), (req, res) => {
+            this.categoryButtonController.addNewButton(req, res);
+        });
         
         app.route('/category-button/:categoryId/button/:buttonId')
            .delete(this.categoryButtonController.deleteButton)
