@@ -45,7 +45,7 @@ class App {
 
         let mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + this.dbName;
      
-        mongoose.connect(mongodb_connection_string);
+        mongoose.connect(mongodb_connection_string, { useNewUrlParser: true });
     }
 }
 
